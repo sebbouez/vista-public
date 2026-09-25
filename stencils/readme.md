@@ -40,7 +40,7 @@ The store for stencils collections to use in Vista.
 | `name` | yes | Name displayed in the stencils library manager. |
 | `description` | no | Short description. |
 | `file` | yes | Path of the ZIP file, relative to the repository root. |
-| `version` | no | Published version, same as `version` in the manifest. |
+| `version` | yes | Published version, same as `version` in the manifest. |
 | `shapesCount` | no | Number of shapes in the collection. |
 | `size` | no | Size of the ZIP file, in bytes. |
 | `sourceUrl` | no | Origin of the icons and their terms of use. |
@@ -48,3 +48,5 @@ The store for stencils collections to use in Vista.
 ## Publishing an update
 
 Increase `version` both in the ZIP `manifest.json` and in `index.json`. Vista offers the update when the published version is newer than the installed one.
+
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for the rules checked on every pull request.

@@ -1,0 +1,21 @@
+# Propriétaires du dépôt des bibliothèques de formes Vista.
+#
+# Ce fichier est utilisé par la règle « Require review from Code Owners »
+# du ruleset de la branche main : toute pull request doit être relue par
+# le ou les propriétaires des fichiers qu'elle modifie.
+#
+# La dernière ligne qui correspond à un fichier l'emporte : les entrées
+# explicites placées en bas ne peuvent donc pas être court-circuitées.
+
+# Par défaut, tout le dépôt
+*                     @sebbouez
+
+# Données publiées : elles sont téléchargées directement par Vista
+/index.json           @sebbouez
+/stencils/            @sebbouez
+
+# Outillage : une pull request peut modifier un workflow, cette revue est obligatoire
+/.github/             @sebbouez
+/.github/workflows/   @sebbouez
+/.github/scripts/     @sebbouez
+/.github/CODEOWNERS   @sebbouez

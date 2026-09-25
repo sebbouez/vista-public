@@ -1,0 +1,72 @@
+# Validation des bibliothèques de formes.
+#
+# Ce workflow est destiné à être déclaré comme « required status check » dans le
+# ruleset de la branche main : une pull request ne peut pas être fusionnée tant
+# qu'il échoue. Vista télécharge les bibliothèques directement depuis main :
+# tout ce qui y est fusionné est immédiatement distribué aux utilisateurs.
+#
+# Le déclencheur est volontairement « pull_request » et non « pull_request_target » :
+# le code d'une pull request issue d'un fork ne doit jamais s'exécuter avec un jeton
+# en écriture ni avec l'accès aux secrets du dépôt.
+
+name: Validate stencils
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Aucune écriture n'est nécessaire : le job lit, valide et publie un artefact de relecture.
+permissions:
+  contents: read
+
+# Une nouvelle version d'une pull request annule la validation encore en cours.
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate stencil libraries
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      # Actions officielles GitHub. Pour toute action tierce ajoutée ici,
+      # épingler impérativement un SHA de commit complet plutôt qu'un tag.
+      # L'historique complet est nécessaire pour comparer les archives avec la branche de base.
+      - name: Check out the repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Python 3 est préinstallé sur les exécuteurs ubuntu-latest :
+      # aucune action supplémentaire ni dépendance externe n'est nécessaire.
+      # Les références sont transmises par variables d'environnement, jamais interpolées dans le script.
+      - name: Validate stencil libraries
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/stencils-preview"
+          args=(--summary "$GITHUB_STEP_SUMMARY" --preview "$RUNNER_TEMP/stencils-preview/index.html")
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            args+=(--base "origin/$BASE_REF")
+          elif [ -n "$BEFORE_SHA" ]; then
+            args+=(--base "$BEFORE_SHA")
+          fi
+          python3 .github/scripts/validate_stencils.py "${args[@]}"
+
+      # Page HTML des formes ajoutées ou modifiées, à télécharger pour la relecture visuelle.
+      - name: Upload shapes preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stencils-preview
+          path: ${{ runner.temp }}/stencils-preview/
+          if-no-files-found: ignore
+          retention-days: 14
