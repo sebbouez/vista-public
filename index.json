@@ -1,0 +1,64 @@
+{
+  "stencils": [
+    {
+      "id": "aws",
+      "name": "AWS",
+      "description": "Amazon Web Services architecture icons.",
+      "file": "stencils/aws stencils.zip",
+      "version": "1.0.0",
+      "shapesCount": 307,
+      "size": 555162,
+      "sourceUrl": "https://aws.amazon.com/architecture/icons/"
+    },
+    {
+      "id": "azure",
+      "name": "Azure",
+      "description": "Microsoft Azure architecture icons.",
+      "file": "stencils/azure stencils.zip",
+      "version": "1.0.0",
+      "shapesCount": 628,
+      "size": 734407,
+      "sourceUrl": "https://learn.microsoft.com/en-us/azure/architecture/icons/"
+    },
+    {
+      "id": "google-cloud",
+      "name": "Google Cloud",
+      "description": "Google Cloud architecture icons.",
+      "file": "stencils/google cloud stencils.zip",
+      "version": "1.0.0",
+      "shapesCount": 216,
+      "size": 171143,
+      "sourceUrl": "https://cloud.google.com/icons"
+    },
+    {
+      "id": "ms365-blue",
+      "name": "Microsoft 365 (blue)",
+      "description": "Microsoft 365 architecture icons, blue variant.",
+      "file": "stencils/ms365_blue.zip",
+      "version": "1.0.0",
+      "shapesCount": 155,
+      "size": 113686,
+      "sourceUrl": "https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/architecture-icons-templates"
+    },
+    {
+      "id": "ms365-grey",
+      "name": "Microsoft 365 (grey)",
+      "description": "Microsoft 365 architecture icons, grey variant.",
+      "file": "stencils/ms365_grey.zip",
+      "version": "1.0.0",
+      "shapesCount": 145,
+      "size": 105712,
+      "sourceUrl": "https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/architecture-icons-templates"
+    },
+    {
+      "id": "ms365-purple",
+      "name": "Microsoft 365 (purple)",
+      "description": "Microsoft 365 architecture icons, purple variant.",
+      "file": "stencils/ms365_purple.zip",
+      "version": "1.0.0",
+      "shapesCount": 145,
+      "size": 105753,
+      "sourceUrl": "https://learn.microsoft.com/en-us/previous-versions/microsoft-365/solutions/architecture-icons-templates"
+    }
+  ]
+}
